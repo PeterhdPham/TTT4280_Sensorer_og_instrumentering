@@ -4,17 +4,16 @@ import matplotlib.pyplot as plt
 
 # Given values
 amplitude = 1  # in volts
-frequency = 20  # in hertz
+frequency = 100  # in hertz
 delta_t_ms = 0.2  # sampling time in milliseconds
 delta_t = delta_t_ms / 1000  # convert milliseconds to seconds
-N_FFT = 2048 # number of datapoints for FFT
+N_FFT = 1024 # number of datapoints for FFT
 
 # Calculate the sampling frequency (fs)
 sampling_frequency = 1 / delta_t
 
 # Time vector for 900 points
 t = np.linspace(0, 900 * delta_t, 900)
-
 
 # Generate the sinusoidal signal x(t)
 x_t = amplitude * np.sin(2 * np.pi * frequency * t)
@@ -34,7 +33,7 @@ t_fft = np.linspace(0, N_FFT * delta_t, N_FFT, endpoint=False)
 x_t_fft = amplitude * np.sin(2 * np.pi * frequency * t_fft)
 
 # Perform the FFT on the signal
-fft_result = np.fft.fft(x_t_fft)
+fft_result = np.fft.fft(x_t_fft, N_FFT)
 
 # Generate the frequency axis for the FFT and calculate the frequency interval Delta f
 freq_axis = np.fft.fftfreq(N_FFT, delta_t)
